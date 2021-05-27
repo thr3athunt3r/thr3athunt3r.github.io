@@ -31,7 +31,7 @@ iconURL: /400x400.jpg
 
 # Build settings
 #theme: minima
-theme: jekyll-theme-leaf
+remote_theme: SupunKavinda/jekyll-theme-leaf
 plugins:
   - jekyll-feed
 
