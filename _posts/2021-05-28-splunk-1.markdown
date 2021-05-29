@@ -21,15 +21,40 @@ categories: splunk
     <br><br>
 
 ### First: Setup Source Initiated Subscription for Windows Event Forwarding
-1. **Configure GPO**
-    - Enable Advanced Audit Policy Configuration
+1. **Configure GPO**    
     - Allow `network access` to Security Events on all clients
+    > Computer Configuration --> Administrative Templates --> Windows Components --> Event Log Service --> Security --> Configure Log Access --> Enabled --> O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)(A;;0x1;;;NS)
     - Enable WinRM on both WEF server and clients (ensure WinRM is set up in best practice)
+    > Computer Configuration --> Administrative Templates --> Windows Components --> Windows Remote Management (WinRM) --> WinRM Service --> Enabled
     - Enable event forwarding subscription for all clients
-    <br><br>
+    > Computer Configuration --> Administrative Templates --> Windows Components --> Event Forwarding --> Configure Target Subscription Manager --> Enabled --> Server=http://<FQDN>:5985/wsman/SubscriptionManager/WEC,Refresh=60
 2. **Create a Windows Event Forwarding Subscription**
-    <br><br>
+    > Event Viewer --> Subscriptions --> Create Subscription --> Source initiated --> (Your Preferences) --> Apply --> OK <br>
+    
+    ***My preferences:***
+    > Application,<br> 
+    > Security,<br> 
+    > Setup,<br> 
+    > System,<br> 
+    > Microsoft-Windows-AppLocker/EXE and DLL,<br> 
+    > Microsoft-Windows-AppLocker/MSI and Script,<br> 
+    > Microsoft-Windows-AppLocker/Packaged app-Deployment,<br> 
+    > Microsoft-Windows-AppLocker/Packaged app-Execution,<br> 
+    > Microsoft-Windows-PowerShell/Admin,<br> 
+    > Microsoft-Windows-PowerShell/Operational,<br> 
+    > Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Admin,<br> 
+    > Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational,<br> 
+    > Microsoft-Windows-SMBClient/Security,<br> 
+    > Microsoft-Windows-TaskScheduler/Maintenance,<br> 
+    > Microsoft-Windows-TerminalServices-LocalSessionManager/Admin,<br> 
+    > Microsoft-Windows-TerminalServices-LocalSessionManager/Operational,<br> 
+    > Microsoft-Windows-TerminalServices-RemoteConnectionManager/Admin,<br> 
+    > Microsoft-Windows-TerminalServices-RemoteConnectionManager/Operational,<br> 
+    > Microsoft-Windows-Windows Remote Management/Operational,<br> 
+    > Microsoft-Windows-WMI-Activity/Operational,<br> 
+    > Windows PowerShell<br> 
+    > 19-21,576-578,1102,4104,4624,4625,4648,4672,4688,4697-4699,4700-4702,4722,4738,4740,4768,4769,4776-4779,5140,5145
 
 {% highlight ruby %}
-Coming Soon!
+To be continued...
 {% endhighlight %}
