@@ -77,6 +77,6 @@ categories: splunk
 
 ___
 #### *Further Reading...*
-*[Filtering Unimportant/Unnecessary Windows Events from Splunk](https://thr3athunt3r.github.io/splunk/2021/05/28/splunk-2.html)*
+*[Filtering Unimportant/Unnecessary Windows Events from Splunk](https://thr3athunt3r.github.io/splunk/2021/05/27/splunk-2.html)*
 
 ___
