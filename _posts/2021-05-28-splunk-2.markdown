@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Threat Hunting with Splunk"
+title:  "Filtering Unimportant/Unnecessary Windows Events from Splunk"
 date:   2021-05-28 02:00:00 +0800
 categories: splunk
 ---

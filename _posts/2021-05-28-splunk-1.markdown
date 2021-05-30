@@ -20,7 +20,7 @@ categories: splunk
     - Windows Server 2012 and above (lower versions are not tested)
     <br><br>
 
-### First: Setup Source Initiated Subscription for Windows Event Forwarding
+### Step 1: Setup Source Initiated Subscription for Windows Event Forwarding
 1. **Configure GPO**    
     - Allow `network access` to Security Events on all clients
     > Computer Configuration --> Administrative Templates --> Windows Components --> Event Log Service --> Security --> Configure Log Access --> Enabled --> O:BAG:SYD:(A;;0xf0005;;;SY)(A;;0x5;;;BA)(A;;0x1;;;S-1-5-32-573)(A;;0x1;;;NS)
@@ -55,6 +55,28 @@ categories: splunk
     > Windows PowerShell<br> 
     > 19-21,576-578,1102,4104,4624,4625,4648,4672,4688,4697-4699,4700-4702,4722,4738,4740,4768,4769,4776-4779,5140,5145
 
-{% highlight ruby %}
-To be continued...
-{% endhighlight %}
+
+### Step 2: Configure Splunk Indexer Prepare to Receive Logs from Windows Event Forwarding Server
+1. **Log on to your Splunk Indexer**
+2. **Configure listen port on `9997`(can be any unused port)**
+    > Settings --> Forwarding and receiving --> Configure receiving --> New Receiving Port --> 9997
+
+3. **The port now should be `enabled`**
+
+### Step 3: Install Splunk Universal Forwarder on Windows Event Forwarding Server
+1. **Get to your Windows Event Forwarding Server**
+2. **Download and install Splunk Universal Forwarder [here](https://www.splunk.com/en_us/download/universal-forwarder.html)**
+3. **During installation, either `Local System`, `Domain Account`, or `Virtual Account` will work, it requires local administrator rights to access those logs**
+4. **You need at least select all the `Windows Event Logs` types for it to works**
+5. **In my environment, I don't use `Deployment Server` so I'll just configure `Receiving Indexer` port as `9997` that we set on previous step**
+6. **Once the installation is completed, Splunk Universal Forwarder will start forwarding the event logs to your indexer automatically**
+
+### Final Step: Check Your Splunk Data Ingestion
+1. **Return to your Splunk Indexer**
+2. **Use the `Search & Reporting` app to ensure your `Windows Event Logs` are being ingested**
+
+___
+#### *Further Reading...*
+*[Filtering Unimportant/Unnecessary Windows Events from Splunk](https://thr3athunt3r.github.io/splunk/2021/05/28/splunk-2.html)*
+
+___
