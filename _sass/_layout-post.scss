@@ -1,10 +1,10 @@
 /**
  * Posts
  */
- .post-header {
+.post-header {
     margin-bottom: $spacing-unit;
 }
-  
+
 .post-title,
 .post-content h1 {
     @include relative-font-size(2.625);
@@ -17,8 +17,18 @@
 }
 
 .post-content {
-    h1, h2, h3 { margin-top: $spacing-unit }
-    h4, h5, h6 { margin-top: $spacing-unit }
+
+    h1,
+    h2,
+    h3 {
+        margin-top: $spacing-unit
+    }
+
+    h4,
+    h5,
+    h6 {
+        margin-top: $spacing-unit
+    }
 
     h2 {
         @include relative-font-size(1.75);
@@ -43,27 +53,46 @@
     h5 {
         @include relative-font-size(1.125);
     }
+
     h6 {
         @include relative-font-size(1.0625);
     }
 }
 
 
-article, .comments, .box {
+article,
+.comments,
+.box {
     padding: $spacing-unit;
     background: $content-color;
     border-radius: 20px;
-    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
     margin: 25px 0;
+
     @include media-query($on-mobile) {
         padding: 0;
         background: transparent;
         box-shadow: none;
     }
 }
+
+.twitter {
+    padding: $spacing-unit;
+    top: 40px;
+    position: sticky;
+    position: -webkit-sticky;
+    align-self: flex-start;
+    flex: 0 0 auto;
+    
+
+    @include media-query($on-mobile) {
+        display: none;
+    }
+}
+
 .comments {
     @media screen and (min-width: $on-mobile) {
-        padding:15px $spacing-unit;
+        padding: 15px $spacing-unit;
     }
 }
 
@@ -77,14 +106,14 @@ article, .comments, .box {
     width: auto;
     overflow: hidden;
 }
-  
+
 .PageNavigation a {
     display: block;
     width: 100%;
     float: left;
     margin: 1em 0;
 }
-  
+
 .PageNavigation .next {
     text-align: right;
 }
