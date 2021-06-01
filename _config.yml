@@ -24,16 +24,18 @@ description: >- # this means to ignore newlines until "baseurl:"
   Some of my methodology, tips, and experience of threats and bugs hunting will be published on this blog.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://thr3athunt3r.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+permalink: :slug
 twitter_username: Charlie24484024
 github_username:  thr3athunt3r
 google_analytics: G-1S703WXQPC
-iconURL: /400x400.jpg
+iconURL: assets/400x400.jpg
 
 # Build settings
 #theme: minima
 remote_theme: SupunKavinda/jekyll-theme-leaf
 plugins:
   - jekyll-feed
+  - jekyll-seo-tag
 
 # Exclude from processing.
 # The following items will not be processed, by default.
