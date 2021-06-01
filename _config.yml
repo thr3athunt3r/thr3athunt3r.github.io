@@ -28,7 +28,7 @@ permalink: :slug
 twitter_username: Charlie24484024
 github_username:  thr3athunt3r
 google_analytics: G-1S703WXQPC
-iconURL: assets/400x400.jpg
+iconURL: /assets/400x400.jpg
 
 # Build settings
 #theme: minima
