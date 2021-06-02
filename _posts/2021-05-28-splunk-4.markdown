@@ -1,6 +1,8 @@
 ---
 layout: post
-title:  "Threat Hunting with Splunk"
+title:  Threat Hunting with Splunk
+image: /assets/400x400.jpg
+author: thr3athunt3r
 date:   2021-05-28 04:00:00 +0800
 categories: splunk
 ---

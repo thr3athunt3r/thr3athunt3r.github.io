@@ -1,6 +1,9 @@
 ---
 layout: post
-title:  "How To Collect Windows Event Logs to Splunk \"AGENTLESS-LY\""
+title:  How To Collect Windows Event Logs to Splunk "AGENTLESS-LY"
+description: Collect windows event logs to Splunk without need of mass deployment.
+image: /assets/400x400.jpg
+author: thr3athunt3r
 date:   2021-05-28 01:40:24 +0800
 categories: splunk
 ---

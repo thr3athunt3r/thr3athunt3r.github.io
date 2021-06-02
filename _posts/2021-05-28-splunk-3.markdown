@@ -1,6 +1,8 @@
 ---
 layout: post
-title:  "Splunk BOTS"
+title:  Splunk BOTS
+image: /assets/400x400.jpg
+author: thr3athunt3r
 date:   2021-05-28 03:00:00 +0800
 categories: splunk
 ---

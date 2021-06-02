@@ -24,11 +24,21 @@ description: >- # this means to ignore newlines until "baseurl:"
   Some of my methodology, tips, and experience of threats and bugs hunting will be published on this blog.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://thr3athunt3r.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-permalink: :slug
 twitter_username: Charlie24484024
 github_username:  thr3athunt3r
 google_analytics: G-1S703WXQPC
 iconURL: /assets/400x400.jpg
+
+author: thr3athunt3r
+permalink: :slug
+twitter:
+  username: Charlie24484024
+  card: summary
+social:
+  name: Thr3at Hunt3r
+  links:
+    - https://twitter.com/Charlie24484024
+    - https://github.com/thr3athunt3r
 
 # Build settings
 #theme: minima
