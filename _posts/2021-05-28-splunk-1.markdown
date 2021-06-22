@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  Splunk - Collect Windows Event Logs "AGENTLESS-LY"
+keywords: [splunk windows event collector, splunk windows event forwarding, windows event forwarding splunk, splunk windows event log]
 description: Collect windows event logs to Splunk without need of mass deployment.
 image: /assets/400x400.jpg
 author: thr3athunt3r
