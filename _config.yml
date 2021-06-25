@@ -21,7 +21,7 @@
 title: Thr3at Hunt3r's Blog
 # email: your-email@example.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Some of my methodology, tips, and experience of threats and bugs hunting will be published on this blog.
+  Blog About My Methodology, Tips, and Experience in Threats and Bugs Hunting.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://thr3athunt3r.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: Charlie24484024
