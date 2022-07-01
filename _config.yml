@@ -24,7 +24,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Blog About My Methodology, Tips, and Experience in Threats and Bugs Hunting.
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://thr3athunt3r.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: Charlie24484024
+twitter_username: thr3athunt3r
 github_username:  thr3athunt3r
 google_analytics: G-1S703WXQPC
 iconURL: /assets/400x400.jpg
@@ -32,12 +32,12 @@ iconURL: /assets/400x400.jpg
 author: thr3athunt3r
 permalink: :slug
 twitter:
-  username: Charlie24484024
+  username: thr3athunt3r
   card: summary
 social:
   name: Thr3at Hunt3r
   links:
-    - https://twitter.com/Charlie24484024
+    - https://twitter.com/thr3athunt3r
     - https://github.com/thr3athunt3r
 
 # Build settings
